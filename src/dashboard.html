@@ -1,0 +1,52 @@
+<main class="dashboard" ng-controller="DashboardCtrl as ctrl">
+    <form class="flex-container" id="date-filter-form">
+        <input placeholder="From" class="responsiveInput" ng-model="ctrl.query.from" type="date" />
+        <input placeholder="To" class="responsiveInput" ng-model="ctrl.query.to" type="date" />
+        <input class="responsiveSubmit" type="submit" ng-click="ctrl.applyFilter()" />
+    </form>
+    <div class="flex-container">
+        <div class="flex-container flex-row">
+            <div class="flex-box income">
+                <div class="label">{{ctrl.income | currency: '&#8377;' }}</div>
+                <div class="value">INCOME</div>
+            </div>
+            <div class="flex-box expenses">
+                <div class="label">{{ctrl.expense | currency: '&#8377;' }}</div>
+                <div class="value">EXPENSES</div>
+            </div>
+        </div>
+        <div class="flex-container flex-row">
+            <div class="flex-box balance">
+                <div class="label">{{(ctrl.income - ctrl.expense) | currency: '&#8377;' }}</div>
+                <div class="value">BALANCE</div>
+            </div>
+            <div class="flex-box transaction">
+                <div class="label">{{ctrl.tabledata.data.length}}</div>
+                <div class="value">TRANSACTIONS</div>
+            </div>
+        </div>
+    </div>
+    <div class="charts">
+        <div class="pie">
+            <div class="title">Expenses - Payment Mode</div>
+            <div id="plot" class="chart" flot="ctrl.graphdata" click="ctrl.plotclick"></div>
+            <div class="legend-container">
+                <div class="legend" ng-repeat="x in ctrl.graphdata.series">
+                    <div class="color-box" style="background-color:{{x.color}}"></div>
+                    {{x.data | currency: '&#8377;' }} {{x.label}}
+                </div>
+            </div>
+        </div>
+        <div class="pie">
+            <div class="title">Expenses - Category</div>
+            <div id="plot" class="chart" flot="ctrl.categoryPie" click="ctrl.plotclick"></div>
+            <div class="legend-container">
+                <div class="legend" ng-repeat="x in ctrl.categoryPie.series">
+                    <div class="color-box" style="background-color:{{x.color}}"></div>
+                    {{x.data | currency: '&#8377;' }} {{x.label}}
+                </div>
+            </div>
+        </div>
+    </div>
+    <table my-table  class="display wrap" options="ctrl.tabledata"></table>
+</main>

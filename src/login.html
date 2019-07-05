@@ -1,0 +1,27 @@
+<div ng-controller="LoginController as ctrl">
+    <main class="form">
+        <div class="flex-container">
+            <form name="sign-up-form" id="sign-up-form" class="form-container">
+                <div class="form-control">
+                    <label class="form-label">Username</label>
+                    <div class="input-container">
+                        <input type="text" class="form-input" ng-model="ctrl.user.username" />
+                        <div class="error-container hide"></div>
+                    </div>
+                </div>
+                <div class="form-control">
+                    <label class="form-label">Password</label>
+                    <div class="input-container">
+                        <input type="password" class="form-input" ng-model="ctrl.user.password" />
+                        <div class="error-container hide"></div>
+                    </div>
+                </div>
+                <div class="form-control button-container">
+                    <button class="button button-submit" type="button" id="sign-up" ng-click="ctrl.authUser();">
+                        Sign Me Up!
+                    </button>
+                </div>
+            </form>
+        </div>
+    </main>
+</div>

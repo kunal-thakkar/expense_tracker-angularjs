@@ -1,0 +1,25 @@
+{
+  "name": "expense.tracker",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {
+    "angular": "^1.7.8",
+    "angular-cookies": "^1.7.8",
+    "angular-route": "^1.7.8",
+    "datatables.net-dt": "^1.10.19",
+    "datatables.net-responsive-dt": "^2.2.3",
+    "flot": "^3.0.2",
+    "flot-pie": "^1.0.0",
+    "gulp": "^4.0.0",
+    "jquery": "^3.3.1"
+  },
+  "devDependencies": {
+    "gulp-concat": "^2.6.1"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC"
+}

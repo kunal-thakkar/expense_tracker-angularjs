@@ -1,0 +1,120 @@
+<div ng-controller="TransactionCtrl as ctrl" class="transaction-container">
+    <div class="flex-container">
+        <div class="transactionForm" id="transactionForm" ng-show="ctrl.form.visible">
+            <div class="title">{{ ctrl.transaction.transactionId ? "Edit" : "Add" }} Transaction</div>
+            <form>
+                <input type="hidden" ng-model="ctrl.transaction.transactionId" />
+                <div class="row">
+                    <div class="col-25">
+                        <label for="dateTime">Date</label>
+                    </div>
+                    <div class="col-75">
+                        <input type="date" id="dateTime" ng-model="ctrl.transaction.dateTime" class="responsiveInput">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-25">
+                        <label for="category">Categoty</label>
+                    </div>
+                    <div class="col-75">
+                        <input type="text" id="category" ng-model="ctrl.transaction.category" list="categories" class="responsiveInput" />
+                        <datalist id="categories"><option ng-repeat="cat in ctrl.categories">{{cat}}</option></datalist>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-25">
+                        <label for="paymentMode">Payment Mode</label>
+                    </div>
+                    <div class="col-75">
+                        <input type="text" id="paymentMode" ng-model="ctrl.transaction.paymentMode" list="paymentModes" class="responsiveInput" />
+                        <datalist id="paymentModes"><option ng-repeat="mode in ctrl.paymentModes">{{mode}}</option></datalist>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-25">
+                        <label for="amount">Amount</label>
+                    </div>
+                    <div class="col-75">
+                        <input type="number" id="amount" ng-model="ctrl.transaction.amount" class="responsiveInput" />
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-25">
+                        <label for="transactionType">Transaction Type</label>
+                    </div>
+                    <div class="col-75">
+                        <input type="radio" ng-model="ctrl.transaction.transactionType" value="cr" /> Income
+                        <input type="radio" ng-model="ctrl.transaction.transactionType" value="dr" /> Expense
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-25">
+                        <label for="description">Description</label>
+                    </div>
+                    <div class="col-75">
+                        <textarea id="description" rows="2" ng-model="ctrl.transaction.description" class="responsiveInput" ></textarea>
+                    </div>
+                </div>
+                <div class="row">
+                    <input type="button" class="two-col" ng-click="ctrl.saveTransaction()" value="Submit">
+                    <input type="reset" class="two-col" ng-click="ctrl.cancelTransaction()" value="Cancel" >
+                </div>
+            </form>
+        </div>
+    </div>
+    <div>
+        <div class="title">All Transactions</div>
+        <div class="action">
+            <i class="material-icons" ng-disabled="ctrl.transaction.transactionId" ng-click="ctrl.addClick()">add</i>
+            <i class="material-icons" ng-disabled="!ctrl.transaction.transactionId" ng-click="ctrl.editClick()">edit</i>
+            <i class="material-icons" ng-disabled="!ctrl.transaction.transactionId" ng-click="ctrl.deleteTransaction()">clear</i>
+        </div>
+        <table my-table options="ctrl.options" class="display" style="width:100%"></table>
+    </div>
+    <div class="filter_panel" id="filter_panel">
+        <form>
+            <div class="row title-container">
+                <div class="title">Filters</div>
+            </div>
+			<div class="row">
+				<label for="dateTime">Period</label>
+				<div>
+					<input type="date" id="dateTime" ng-model="ctrl.filter.from" class="responsiveInput two-col">
+					<input type="date" id="dateTime" ng-model="ctrl.filter.to" class="responsiveInput two-col">
+				</div>
+            </div>
+            <div class="row">
+				<label for="category">Categories</label>
+				<input type="text" id="category" ng-model="ctrl.filter.category" list="categories" class="responsiveInput" />
+				<datalist id="categories"><option ng-repeat="cat in ctrl.categories">{{cat}}</option></datalist>
+            </div>
+            <div class="row">
+				<label for="paymentMode">Payment Mode</label>
+				<input type="text" id="paymentMode" ng-model="ctrl.filter.paymentMode" list="paymentModes" class="responsiveInput" />
+				<datalist id="paymentModes"><option ng-repeat="mode in ctrl.paymentModes">{{mode}}</option></datalist>
+            </div>
+            <div class="row">
+                <label for="amount">Amount</label>
+                <div>
+                    <input type="number" id="amount" ng-model="ctrl.filter.amountMin" placeholder="Min Amt." class="responsiveInput two-col" />
+                    <input type="number" id="amount" ng-model="ctrl.filter.amountMax" placeholder="Max Amt." class="responsiveInput two-col" />
+                </div>
+			</div>
+            <div class="row">
+				<label for="transactionType">Transaction Type</label>
+                <div>
+                    <input type="radio" ng-model="ctrl.filter.transactionType" value="" /> All
+                    <input type="radio" ng-model="ctrl.filter.transactionType" value="cr" /> Income
+                    <input type="radio" ng-model="ctrl.filter.transactionType" value="dr" /> Expense
+                </div>
+			</div>
+            <div class="row">
+				<label for="description">Description</label>
+				<textarea id="description" rows="2" ng-model="ctrl.filter.description" class="responsiveInput" ></textarea>
+            </div>
+            <div class="row">
+                <input type="button" ng-click="ctrl.applyFilter()" value="Submit">
+            </div>
+        </form>
+    </div>
+</div>
